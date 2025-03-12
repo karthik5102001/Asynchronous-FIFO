@@ -1,7 +1,7 @@
 
 # Async FIFO
 
-Overview
+## Overview
 
 This repository contains an implementation of an Asynchronous FIFO (First-In, First-Out) buffer in HDL. The FIFO is designed to handle data transfer between two clock domains with different frequencies, ensuring reliable and efficient communication.
 
