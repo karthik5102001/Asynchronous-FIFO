@@ -16,34 +16,34 @@ module Async_fifo #(parameter Width=4)
 
 	// Wires to write pointer module
 	wire full_from_full_logic;
-	wire [Address+1:0] wrt_ptr_to_b2g;
-	wire [Address+1:0] red_ptr_from_g2b_sync;
+	wire [Address:0] wrt_ptr_to_b2g;
+	wire [Address:0] red_ptr_from_g2b_sync;
 
 	// Wire to binary to gray from write pointer side to dff
-	wire [Address+1:0] wrt_ptr_from_b2g_2_dff;
+	wire [Address:0] wrt_ptr_from_b2g_2_dff;
 
 	// Wire to Dff to gray to binary
 //	wire [Width-1:0] Dff_to_Dff_wrt_ptr;
-	wire [Address+1:0] Dff_to_g2b_wrt_ptr;
+	wire [Address:0] Dff_to_g2b_wrt_ptr;
 
 	// Wire to write pointer to memory
 	wire [Width-1:0] wrt_ptr_2_memory;
 	
-	wire [Address+1:0] wrt_ptr_from_g2b_sync;
+	wire [Address:0] wrt_ptr_from_g2b_sync;
 
 	// READ Side
 
 	// Wires to read pointer module
 	wire empty_from_empty_logic;
-	wire [Address+1:0] red_ptr_to_b2g;
+	wire [Address:0] red_ptr_to_b2g;
 //	wire [Width-1:0] wrt_ptr_from_b2g_sync;
 
 	// Wire to binary to gray from read pointer side to dff
-	wire [Address+1:0] rd_ptr_from_b2g_2_dff;
+	wire [Address:0] rd_ptr_from_b2g_2_dff;
 
 	// Wire to Dff to gray to binary
 //	wire [Width-1:0] Dff_to_Dff_rd_ptr;
-	wire [Address+1:0] Dff_to_g2b_rd_ptr;
+	wire [Address:0] Dff_to_g2b_rd_ptr;
 
 	// Wire to read pointer to memory
 //	wire [Width-1:0] rd_ptr_2_memory;

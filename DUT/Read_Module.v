@@ -1,12 +1,12 @@
 module read_ptr_empty_logic #(parameter address=2) (rclk,r_rst,r_en,write_ptr,read_ptr,empty);
 
 	input rclk,r_rst,r_en;
-	input [address+1:0] write_ptr;
-	output [address+1:0] read_ptr;
+	input [address:0] write_ptr;
+	output [address:0] read_ptr;
 	output empty;
 
-	reg [address+1:0] count;
-	reg [address+1:0] read_pointer;
+	reg [address:0] count;
+	reg [address:0] read_pointer;
 	reg empty_logic;
 
 always @(posedge rclk or posedge r_rst)
@@ -17,10 +17,10 @@ begin
 		count <= 0;
 	end
 	else 
-			if(r_en == 1'b1)
+			if(r_en == 1'b1 || r_rst == 1'b0)
 			begin
 			    read_pointer <= count;
-				if(write_ptr[address+1:0] == read_pointer[address+1:0])
+				if(write_ptr[address:0] == read_pointer[address:0])
 				begin
 					empty_logic <= 1'b1;
 				end

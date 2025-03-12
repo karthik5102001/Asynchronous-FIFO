@@ -1,9 +1,9 @@
 
-module g2b #(parameter W = 4) (input [W+1:0] gray,output [W+1:0] binary);
+module g2b #(parameter W = 4) (input [W:0] gray,output [W:0] binary);
 
 genvar i;
 generate 
-	for(i=0;i<=W+1;i=i+1)
+	for(i=0;i<=W;i=i+1)
 	begin
 		assign binary[i] = ^ (gray >> i);
 	end	

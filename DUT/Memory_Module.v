@@ -14,7 +14,7 @@ module memory #(parameter Width=4,parameter Address=2)(
 	input empty
 );
 
-reg [Width-1:0] mem [Address:0];
+reg [Width-1:0] mem [Address-1:0];
 
 /// Write operation 
 
@@ -43,3 +43,4 @@ always @(posedge r_clk or posedge r_rst)
 	//		end
 	end
 endmodule
+

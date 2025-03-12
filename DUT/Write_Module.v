@@ -2,12 +2,12 @@ module write_ptr_full_logic #(parameter address=2) (wclk,wreset,wen,read_ptr,wri
 	input wclk;
 	input wreset;
 	input wen;
-	input [address+1:0] read_ptr;
-	output [address+1:0] write_ptr;
+	input [address:0] read_ptr;
+	output [address:0] write_ptr;
 	output full;
 
-	reg [address+1:0] count;
-	reg [address+1:0] write_pointer;
+	reg [address:0] count;
+	reg [address:0] write_pointer;
 	reg full_logic;
 
 always@(posedge wclk or posedge wreset)
@@ -18,12 +18,16 @@ begin
 				full_logic <= 1'b0;
 			end
 	else 
-			if(wen == 1'b1)
+			if(wen == 1'b1 || wreset == 1'b0)
 			begin
 			     write_pointer <= count;
-				if({~write_pointer[address],write_pointer[address-1:0]} == read_ptr[address+1:0])
+				if({~write_pointer[address],write_pointer[address-1:0]} == read_ptr[address:0])
 				begin
 						full_logic <= 1'b1;
+				end
+				else
+				begin
+				        full_logic <= 1'b0;
 				end
 			end
 
