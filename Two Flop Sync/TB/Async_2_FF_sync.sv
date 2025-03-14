@@ -82,31 +82,20 @@ w_Reset;
 r_Reset;
 join
 i = 0;
-/*for(i=0 ; i < 4; i = i + 1)
+for(i=0 ; i < 17; i = i + 1)
 begin
 Data; //
 if(full == 0)
 In_w;
 end
+
 j = 0;
-for(j=0 ; j < 4; j = j + 1)
+for(j=0 ; j < 17; j = j + 1)
 begin
 if(empty == 0)
 out_r;
 end
-*/
-Data;
-In_w;
-Data;
-In_w;
-Data;
-In_w;
-Data;
-In_w;
-Data;
-In_w;
-Data;
-In_w;
+/*
 Data;
 In_w;
 Data;
@@ -115,10 +104,7 @@ In_w;
 out_r;
 out_r;
 out_r;
-out_r;
-out_r;
-out_r;
-out_r;
+*/
 end
 
 
