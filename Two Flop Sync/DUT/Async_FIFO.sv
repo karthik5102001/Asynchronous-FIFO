@@ -23,7 +23,7 @@ module Async_fifo #(parameter Width=4)
 	wire [Address:0] wrt_ptr_from_b2g_2_dff;
 
 	// Wire to Dff to gray to binary
-//	wire [Width-1:0] Dff_to_Dff_wrt_ptr;
+    //	wire [Width-1:0] Dff_to_Dff_wrt_ptr;
 	wire [Address:0] Dff_to_g2b_wrt_ptr;
 
 	// Wire to write pointer to memory
@@ -48,14 +48,8 @@ module Async_fifo #(parameter Width=4)
 	// Wire to read pointer to memory
 //	wire [Width-1:0] rd_ptr_2_memory;
 
-	// Wire from Dff to G2B
-
-	// Extra Wires
-
 	// Wire to and logic
 	wire and_of_wen_full_wrt_ptr_side;
-	
-	//
 	
 	write_ptr_full_logic  #(Address) WRITE_POINTER (wclk,wreset,wen,red_ptr_from_g2b_sync,wrt_ptr_to_b2g,full_from_full_logic);
 	b2g  #(Address) BINARY_TO_GRAY_FROM_WRITE_POINTER (wrt_ptr_to_b2g,wrt_ptr_from_b2g_2_dff);
