@@ -9,7 +9,7 @@ module Async_fifo #(parameter Width=4)
 	output empty;
 
     // Extra wires
-    localparam Address=$clog2(Width);
+    localparam Address=2**Width;
     wire [Width-1:0] Read_Data;
    
 	// WRITE Side

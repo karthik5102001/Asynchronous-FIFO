@@ -7,45 +7,48 @@ module write_ptr_full_logic #(parameter address=2) (wclk,wreset,wen,read_ptr,wri
 	output full;
 
 	reg [address:0] count;
-	reg [address:0] write_pointer;
+	wire [address:0] write_pointer;
 	reg full_logic;
 
 always@(posedge wclk or posedge wreset)
 begin 
 	if(wreset == 1'b1)
 			begin
-				count <= 0;
-				full_logic <= 1'b0;
+				count = 0;
+				full_logic = 1'b0;
 			end
-	else 
-			if(wen == 1'b1 || wreset == 1'b0)
+	else if(wen == 1'b1 || wreset == 1'b0)
 			begin
-			     write_pointer <= count;
-				if({~write_pointer[address],write_pointer[address-1:0]} == read_ptr[address:0])
+			     $display("1 .Write Pointer value = %0d at time %0t",write_pointer,$time);
+				if({~write_pointer[address],write_pointer[address-1:0]} === read_ptr[address:0])
 				begin
-						full_logic <= 1'b1;
+						full_logic = 1'b1;
+						$display("2 .Write Pointer value = %0d at time %0t",write_pointer,$time);
 				end
 				else
 				begin
-				        full_logic <= 1'b0;
+				        full_logic = 1'b0;
 				end
 			end
-
+			else begin
+			     full_logic = 1'b0;
+			end
 end
 
 
-always @(posedge wclk or negedge wreset)
+always @(posedge wclk)
 begin
-	if(full_logic != 1'b1 && wen == 1'b1 )
+    if(wreset == 1'b1)
+			begin
+				count <= 0;
+			end
+	else if(full_logic == 1'b0 && wen == 1'b1 )
 	begin
 		count <= count + 1;
 	end
-//	else
-//	begin
-//		count <= count;
-//	end
 end		
 
+assign write_pointer = count;
 assign write_ptr = count;
 assign full = full_logic;
 

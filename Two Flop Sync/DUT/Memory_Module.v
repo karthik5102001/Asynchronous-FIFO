@@ -6,8 +6,8 @@ module memory #(parameter Width=4,parameter Address=2)(
 	input  w_rst,
 	input  r_clk,
 	input  r_rst,
-	input  [Address:0] w_addr,
-	input  [Address:0] r_addr,
+	input  [Address-1:0] w_addr,
+	input  [Address-1:0] r_addr,
 	input  w_en,
 	input  r_en,
 	input full,
@@ -24,10 +24,6 @@ always @(posedge w_clk or posedge w_rst)
 			begin
 			mem[w_addr] <= w_data;	
 			end
-	//	else
-		//	begin
-		//	mem[w_addr] <= mem[w_addr];  // wanted latch 
-	//		end
 	end
 
 // Read Operation
@@ -38,9 +34,6 @@ always @(posedge r_clk or posedge r_rst)
 			begin
 			 r_data <= mem[r_addr] ;
 			end
-	//	else    begin
-	//		r_data <= r_data;   // wanted latch
-	//		end
 	end
 endmodule
 
