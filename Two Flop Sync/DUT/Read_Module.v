@@ -18,17 +18,17 @@ begin
 	end
 	else if(r_en == 1'b1 || r_rst == 1'b0)
 	       begin 
-				if(write_ptr[address:0] === read_pointer[address:0])
+				if(write_ptr[address:0] == read_pointer[address:0])
 				begin
-					empty_logic <= 1'b1;
+					empty_logic = 1'b1;
 				end
 				else
 				begin
-					empty_logic <= 1'b0;
+					empty_logic = 1'b0;
 				end
 			end
 	 else begin
-			         empty_logic <= 1'b0;
+			         empty_logic = 1'b0;
 		  end
 end
 
