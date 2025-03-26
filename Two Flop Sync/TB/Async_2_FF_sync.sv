@@ -28,9 +28,9 @@ endtask
 task w_Reset;
  begin
 		#50;
-	wreset = 1'b1;
+	wreset = 1'b0;
 		#50;
-		wreset = 1'b0;
+		wreset = 1'b1;
 		#60;
 end
 endtask
@@ -38,9 +38,9 @@ endtask
 task r_Reset;
  begin
 		#50;
-	r_rst = 1'b1;
+    	r_rst = 1'b0;
 		#50;
-		r_rst = 1'b0;
+		r_rst = 1'b1;
 		#60;
 end
 endtask
@@ -81,32 +81,20 @@ fork
 w_Reset;
 r_Reset;
 join
+///
 i = 0;
-for(i=0 ; i < 17; i = i + 1)
+for(i=0 ; i < 10; i = i + 1)
 begin
-Data; //
-if(full == 0)
+Data; 
 In_w;
 end
-
+///
 j = 0;
-for(j=0 ; j < 17; j = j + 1)
+for(j=0 ; j < 9; j = j + 1)
 begin
-if(empty == 0)
 out_r;
 end
-/*
-Data;
-In_w;
-Data;
-In_w;
-
-out_r;
-out_r;
-out_r;
-*/
 end
-
 
 initial begin
 	$dumpfile("wave.vpd");

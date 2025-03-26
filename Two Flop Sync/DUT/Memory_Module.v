@@ -24,9 +24,9 @@ always @(posedge w_clk or negedge w_rst)
 	   begin
 	       r_data <= 'bx;
 	   end
-		else if(w_en == 1'b1 && ~full )
+		else if(w_en == 1'b1 && ~full)
 			begin
-			mem[w_addr] <= w_data;	
+			mem[w_addr] = w_data;	
 			end
 	end
 

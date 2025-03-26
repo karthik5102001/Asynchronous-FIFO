@@ -10,13 +10,13 @@ module write_ptr_full_logic #(parameter address=2) (wclk,wreset,wen,read_ptr,wri
 	wire [address:0] write_pointer;
 	reg full_logic;
 
-always@(posedge wclk or posedge wreset)
+always@(posedge wclk or negedge wreset)
 begin 
-	if(wreset == 1'b1)
+	if(wreset == 1'b0)
 			begin
 				full_logic = 1'b0;
 			end
-	else if(wen == 1'b1 || wreset == 1'b0)
+	else if(wen == 1'b1 || wreset == 1'b1)
 			begin
 			    // $display("1 .Write Pointer value = %0d at time %0t",write_pointer,$time);
 				if({~write_pointer[address],write_pointer[address-1:0]} == read_ptr[address:0])
@@ -35,13 +35,13 @@ begin
 end
 
 
-always @(posedge wclk)
+always @(posedge wclk or negedge wreset)
 begin
-    if(wreset == 1'b1)
+    if(wreset == 1'b0)
 			begin
 				count <= 0;
 			end
-	else if(full_logic == 1'b0 && wen == 1'b1 )
+	else if(full_logic == 1'b0 && wen == 1'b1)
 	begin
 		count <= count + 1;
 	end

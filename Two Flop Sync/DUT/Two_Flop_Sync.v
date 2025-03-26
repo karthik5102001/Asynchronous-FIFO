@@ -2,16 +2,15 @@
 module dff_sync #(parameter Width = 4)(clock,reset,din,dout);
 input clock;
 input reset;
-input [Width+1:0] din;
-output [Width+1:0] dout;
+input [Width:0] din;
+output [Width:0] dout;
 
-reg [Width+1:0] q1;
-reg [Width+1:0] q2;
-reg [Width+1:0] dout_reg;
+reg [Width:0] q1;
+reg [Width:0] dout_reg;
 
-always @(posedge clock)
+always @(posedge clock or negedge reset)
 begin
-if(reset)	
+if(reset == 0)	
 	dout_reg <= 1'b0;
 else 
 	q1 <= din;

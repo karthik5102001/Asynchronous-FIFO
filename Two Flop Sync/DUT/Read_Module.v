@@ -9,14 +9,14 @@ module read_ptr_empty_logic #(parameter address=2) (rclk,r_rst,r_en,write_ptr,re
 	wire [address:0] read_pointer;
 	reg empty_logic;
 
-always @(posedge rclk or posedge r_rst)
+always @(posedge rclk or negedge r_rst)
 begin
   //  read_pointer = count;
-	if(r_rst == 1'b1)
+	if(r_rst == 1'b0)
 	begin
 		empty_logic <= 1'b1;
 	end
-	else if(r_en == 1'b1 || r_rst == 1'b0)
+	else if(r_en == 1'b1 || r_rst == 1'b1)
 	       begin 
 				if(write_ptr[address:0] == read_pointer[address:0])
 				begin
@@ -32,9 +32,9 @@ begin
 		  end
 end
 
-always @(posedge r_en or posedge r_rst)
+always @(posedge r_en or negedge r_rst)
 begin
-if(r_rst == 1'b1)
+if(r_rst == 1'b0)
 	begin
 		count <= 0;
 	end
